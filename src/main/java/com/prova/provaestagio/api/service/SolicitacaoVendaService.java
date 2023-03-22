@@ -22,14 +22,9 @@ public class SolicitacaoVendaService {
     private VendaRepository vendaRepository;
 
     @Transactional
-    public Venda generateSale(Long vendedorId, String vendedorNome, Double valor){
-        Venda venda = new Venda();
+    public Venda gerarVenda(Venda venda){
         venda.setDataVenda(OffsetDateTime.now());
-        venda.setValor(valor);
-        venda.setVendedorId(vendedorId);
-        venda.setVendedorNome(vendedorNome);
-
-        return venda;
+        return vendaRepository.save(venda);
     }
 
 }
