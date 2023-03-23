@@ -1,15 +1,14 @@
 package com.prova.provaestagio.api.service;
 
 import com.prova.provaestagio.api.repository.VendaRepository;
-import com.prova.provaestagio.models.Produto;
-import com.prova.provaestagio.models.Venda;
-import com.prova.provaestagio.models.Vendedor;
+import com.prova.provaestagio.api.repository.VendedorRepository;
+import com.prova.provaestagio.exception.NegocioException;
+import com.prova.provaestagio.model.Venda;
+import com.prova.provaestagio.model.Vendedor;
+import com.prova.provaestagio.model.enums.StatusVenda;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.OffsetDateTime;
 
@@ -21,9 +20,16 @@ public class SolicitacaoVendaService {
 
     private VendaRepository vendaRepository;
 
+    private VendedorRepository vendedorRepository;
+
     @Transactional
     public Venda gerarVenda(Venda venda){
-        venda.setDataVenda(OffsetDateTime.now());
+
+        Vendedor vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
+
+        venda.setVendedor(vendedor);
+        venda.setVendaDate(OffsetDateTime.now());
+        venda.setStatusVenda(StatusVenda.ABERTA);
         return vendaRepository.save(venda);
     }
 
