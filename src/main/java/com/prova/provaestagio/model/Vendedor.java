@@ -3,7 +3,9 @@ package com.prova.provaestagio.model;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
@@ -11,7 +13,6 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Table(name = "VENDEDOR")
-@AllArgsConstructor
 public class Vendedor{
 
     @Id

@@ -3,7 +3,6 @@ package com.prova.provaestagio.service;
 
 import com.prova.provaestagio.comum.DataService;
 import com.prova.provaestagio.dtos.VendaResponse;
-import com.prova.provaestagio.enums.EStatusVenda;
 import com.prova.provaestagio.exception.NegocioException;
 import com.prova.provaestagio.model.Venda;
 import com.prova.provaestagio.model.Vendedor;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.prova.provaestagio.enums.EStatusVenda.*;
@@ -48,22 +46,36 @@ public class VendaService {
 
     }
 
-    private Venda definirVendaAberta(Vendedor vendedor, Venda venda){
-        return Venda.builder()
-                .vendaDate(OffsetDateTime.now())
-                .vendedor(vendedor)
-                .statusVenda(ABERTA)
-                .build();
-    }
+//    PROBLEMA AQUI
+
+//    @Transactional
+//    private Venda definirVendaAberta(Vendedor vendedor, Venda venda){
+//        return Venda.builder()
+//                .vendaDate(OffsetDateTime.now())
+//                .vendedor(vendedor)
+//                .statusVenda(ABERTA)
+//                .valor(venda.getValor())
+//                .build();
+//    }
+//
+//    @Transactional
+//    public Venda gerarVenda(Venda venda){
+//        var vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
+//
+//        venda = definirVendaAberta(vendedor, venda);
+//
+//        return vendaRepository.save(venda);
+//    }
+
 
     @Transactional
     public Venda gerarVenda(Venda venda){
-        var vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
-        definirVendaAberta(vendedor, venda);
+
+        Vendedor vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
+
+        venda.setVendedor(vendedor);
+        venda.setVendaDate(OffsetDateTime.now());
+        venda.setStatusVenda(ABERTA);
         return vendaRepository.save(venda);
     }
-
-    //o problema ta aqui
-
-
 }

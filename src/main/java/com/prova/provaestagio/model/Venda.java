@@ -1,11 +1,12 @@
 package com.prova.provaestagio.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prova.provaestagio.enums.EStatusVenda;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.OffsetDateTime;
 
@@ -15,8 +16,7 @@ import java.time.OffsetDateTime;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Table(name = "VENDA")
-@Builder
-@AllArgsConstructor
+//@Builder
 public class Venda {
 
     @Id
@@ -37,7 +37,6 @@ public class Venda {
     private Double valor;
 
     @ManyToOne
-    @JsonIgnoreProperties("vendas")
     private Vendedor vendedor;
 
 }

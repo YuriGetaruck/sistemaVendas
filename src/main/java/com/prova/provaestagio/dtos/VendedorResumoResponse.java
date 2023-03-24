@@ -11,9 +11,7 @@ import java.util.List;
 public class VendedorResumoResponse {
 
     private String nome;
-
     private double totalDeVendasNoPeriodo;
-
     private double mediaDeVendasDiariasNoPeriodo;
 
     //tentar tirar o get
@@ -23,6 +21,4 @@ public class VendedorResumoResponse {
         this.totalDeVendasNoPeriodo = vendasDoVendedor.size();
         this.mediaDeVendasDiariasNoPeriodo = (vendasDoVendedor.size()/tamanhoPeriodoDias);
     }
-
-
 }
