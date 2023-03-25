@@ -46,6 +46,17 @@ public class VendaService {
 
     }
 
+    @Transactional
+    public Venda gerarVenda(Venda venda){
+
+        Vendedor vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
+
+        venda.setVendedor(vendedor);
+        venda.setVendaDate(OffsetDateTime.now());
+        venda.setStatusVenda(ABERTA);
+        return vendaRepository.save(venda);
+    }
+
 //    PROBLEMA AQUI
 
 //    @Transactional
@@ -68,14 +79,5 @@ public class VendaService {
 //    }
 
 
-    @Transactional
-    public Venda gerarVenda(Venda venda){
 
-        Vendedor vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
-
-        venda.setVendedor(vendedor);
-        venda.setVendaDate(OffsetDateTime.now());
-        venda.setStatusVenda(ABERTA);
-        return vendaRepository.save(venda);
-    }
 }
