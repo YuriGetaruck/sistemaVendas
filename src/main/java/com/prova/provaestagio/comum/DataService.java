@@ -30,8 +30,6 @@ public class DataService {
         } catch (ValidacaoException e) {
             throw new ValidacaoException("Data invalida");
         }
-
-
     }
 
     public void validaDataValida(String dataInicial, String dataFinal) {
@@ -47,9 +45,4 @@ public class DataService {
             throw new ValidacaoException("Data invalida");
         }
     }
-
-
-
-
-
 }

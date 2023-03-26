@@ -11,14 +11,15 @@ import org.hibernate.validator.constraints.UniqueElements;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@Table(name = "VENDEDOR")
+@Table(name = "VENDEDOR",  uniqueConstraints = {@UniqueConstraint(columnNames = "CPF_VENDEDOR")})
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vendedor{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "SEQ_VENDEDOR", sequenceName = "SEQ_VENDEDOR", allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_VENDEDOR", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Valid

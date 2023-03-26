@@ -1,6 +1,7 @@
 package com.prova.provaestagio.dtos;
 
 import com.prova.provaestagio.model.Venda;
+import com.prova.provaestagio.model.Vendedor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,9 @@ public class VendedorResumoResponse {
 
     //tentar tirar o get
 
-    public VendedorResumoResponse(List<Venda> vendasDoVendedor, Double tamanhoPeriodoDias){
-        this.nome = vendasDoVendedor.get(0).getVendedor().getNome();
+    public VendedorResumoResponse(List<Venda> vendasDoVendedor, Double tamanhoPeriodoDias, Vendedor vendedor) {
+        this.nome = vendedor.getNome();
         this.totalDeVendasNoPeriodo = vendasDoVendedor.size();
-        this.mediaDeVendasDiariasNoPeriodo = (vendasDoVendedor.size()/tamanhoPeriodoDias);
+        this.mediaDeVendasDiariasNoPeriodo = (vendasDoVendedor.size() / tamanhoPeriodoDias);
     }
 }

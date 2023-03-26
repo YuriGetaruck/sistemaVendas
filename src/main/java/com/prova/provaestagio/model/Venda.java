@@ -21,10 +21,8 @@ public class Venda {
 
     @Id
     @Column(name = "ID")
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @SequenceGenerator(name = "SEQ_VENDA", sequenceName = "SEQ_VENDA", allocationSize = 1)
     @GeneratedValue(generator = "SEQ_VENDA", strategy = GenerationType.SEQUENCE)
-
     private Long id;
 
     @Column(name = "STATUS")

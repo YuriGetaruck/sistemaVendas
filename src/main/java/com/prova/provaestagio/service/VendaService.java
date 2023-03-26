@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.OffsetDateTime;
 import java.util.List;
 
-import static com.prova.provaestagio.enums.EStatusVenda.*;
+import static com.prova.provaestagio.enums.EStatusVenda.ABERTA;
 
 @AllArgsConstructor
 @Service
@@ -62,7 +62,4 @@ public class VendaService {
 
         return vendaRepository.save(venda);
     }
-
-
-
 }

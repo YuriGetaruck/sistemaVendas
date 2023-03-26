@@ -5,14 +5,12 @@ import com.prova.provaestagio.dtos.VendedorResumoResponse;
 import com.prova.provaestagio.model.Vendedor;
 import com.prova.provaestagio.service.VendedorService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("vendedor")
 public class VendedorController {
@@ -32,7 +30,7 @@ public class VendedorController {
     }
 
     @GetMapping("{dataInicial}/{dataFinal}")
-    public List<VendedorResumoResponse> resumoVendedor(@PathVariable String dataInicial, @PathVariable String dataFinal) {
-        return vendedorService.resumoVendedor(dataInicial, dataFinal);
+    public List<VendedorResumoResponse> resumoVendedores(@PathVariable String dataInicial, @PathVariable String dataFinal) {
+        return vendedorService.resumoVendedores(dataInicial, dataFinal);
     }
 }

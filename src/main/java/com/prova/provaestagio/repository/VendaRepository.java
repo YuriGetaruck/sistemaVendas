@@ -1,7 +1,6 @@
 package com.prova.provaestagio.repository;
 
 import com.prova.provaestagio.model.Venda;
-import jakarta.persistence.Tuple;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

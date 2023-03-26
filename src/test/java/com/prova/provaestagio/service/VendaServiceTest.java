@@ -3,8 +3,6 @@ package com.prova.provaestagio.service;
 
 import com.prova.provaestagio.enums.EStatusVenda;
 import com.prova.provaestagio.exception.NegocioException;
-import com.prova.provaestagio.helper.Helper;
-import com.prova.provaestagio.model.Venda;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,10 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.prova.provaestagio.helper.Helper.*;
-import static org.assertj.core.api.Assertions.*;
+import static com.prova.provaestagio.helper.Helper.umaVendaParaTeste;
+import static com.prova.provaestagio.helper.Helper.umaVendaParaTesteComVendedorInvalido;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -59,9 +59,4 @@ public class VendaServiceTest {
                 .isThrownBy(() -> vendaService.gerarVenda(umaVendaParaTesteComVendedorInvalido()))
                 .withMessage("Vendedor nao encontrado");
     }
-
-
-
-
-
 }

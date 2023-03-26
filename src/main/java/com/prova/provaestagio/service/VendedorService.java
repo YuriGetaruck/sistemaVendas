@@ -3,6 +3,7 @@ package com.prova.provaestagio.service;
 import com.prova.provaestagio.comum.DataService;
 import com.prova.provaestagio.dtos.VendedorResponse;
 import com.prova.provaestagio.dtos.VendedorResumoResponse;
+import com.prova.provaestagio.exception.NegocioException;
 import com.prova.provaestagio.model.Venda;
 import com.prova.provaestagio.model.Vendedor;
 import com.prova.provaestagio.repository.VendedorRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,8 +34,12 @@ public class VendedorService {
         return vendedorRepository.findAll().stream().map(VendedorResponse::of).toList();
     }
 
+    public Vendedor findById(Long id){
+        return vendedorRepository.findById(id).orElseThrow();
+    }
+
     @Transactional
-    public List<VendedorResumoResponse> resumoVendedor(@PathVariable String dataInicial, @PathVariable String dataFinal){
+    public List<VendedorResumoResponse> resumoVendedores(@PathVariable String dataInicial, @PathVariable String dataFinal){
 
         var diasNoPerido = DataService.diasNoPeriodo(dataInicial, dataFinal);
         var vendasNoPerido = vendaService.vendasNoPeriodo(dataInicial, dataFinal);
@@ -44,7 +50,7 @@ public class VendedorService {
                     List<Venda> vendasDoVendedor = vendasNoPerido.stream()
                             .filter(venda -> venda.getVendedor().getId().equals(vendedor.getId()))
                             .collect(Collectors.toList());
-                    return new VendedorResumoResponse(vendasDoVendedor, (double) diasNoPerido);
+                    return new VendedorResumoResponse(vendasDoVendedor, (double) diasNoPerido, vendedor);
                 })
                 .collect(Collectors.toList());
     }

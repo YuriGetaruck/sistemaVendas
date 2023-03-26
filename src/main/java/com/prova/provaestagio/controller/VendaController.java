@@ -34,5 +34,4 @@ public class VendaController {
         return vendaService.vendasNoPeriodo(dataInicial, dataFinal);
     }
 
-
 }
