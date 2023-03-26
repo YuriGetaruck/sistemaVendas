@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.prova.provaestagio.enums.EStatusVenda;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
@@ -16,12 +14,17 @@ import java.time.OffsetDateTime;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Table(name = "VENDA")
-//@Builder
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Venda {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "SEQ_VENDA", sequenceName = "SEQ_VENDA", allocationSize = 1)
+    @GeneratedValue(generator = "SEQ_VENDA", strategy = GenerationType.SEQUENCE)
+
     private Long id;
 
     @Column(name = "STATUS")
@@ -30,6 +33,7 @@ public class Venda {
     private EStatusVenda statusVenda;
 
     @Column(name = "DATA_VENDA")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime vendaDate;
 
     @Column(name = "VALOR")

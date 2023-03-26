@@ -24,6 +24,8 @@ public class DataService {
 
             if (dataInicial.equals(dataFinal)) {
                 return 1;
+            } else if (ChronoUnit.DAYS.between(date1, date2 ) < 0) {
+                throw new ValidacaoException("Datas invalida");
             } else return ChronoUnit.DAYS.between(date1, date2) + 1;
         } catch (ValidacaoException e) {
             throw new ValidacaoException("Data invalida");
@@ -45,4 +47,9 @@ public class DataService {
             throw new ValidacaoException("Data invalida");
         }
     }
+
+
+
+
+
 }

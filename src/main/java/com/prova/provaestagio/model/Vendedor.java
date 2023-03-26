@@ -3,9 +3,8 @@ package com.prova.provaestagio.model;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 
 @Entity
@@ -13,6 +12,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Table(name = "VENDEDOR")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vendedor{
 
     @Id
@@ -21,12 +23,12 @@ public class Vendedor{
 
     @Valid
     @NotBlank
-    @Column(name = "NOME_VENDEDOR")
-    private String nome;
+    @Column(name = "CPF_VENDEDOR")
+    private String CPF;
 
     @Valid
     @NotBlank
-    @Column(name = "CPF_VENDEDOR")
-    private String CPF;
+    @Column(name = "NOME_VENDEDOR")
+    private String nome;
 
 }

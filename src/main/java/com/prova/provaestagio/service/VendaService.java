@@ -24,10 +24,8 @@ public class VendaService {
 
     @Autowired
     private VendaRepository vendaRepository;
-
     @Autowired
     private VendedorRepository vendedorRepository;
-
     @Autowired
     private DataService dataService;
 
@@ -47,36 +45,23 @@ public class VendaService {
     }
 
     @Transactional
-    public Venda gerarVenda(Venda venda){
-
-        Vendedor vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
-
-        venda.setVendedor(vendedor);
-        venda.setVendaDate(OffsetDateTime.now());
-        venda.setStatusVenda(ABERTA);
-        return vendaRepository.save(venda);
+    private Venda definirVendaAberta(Vendedor vendedor, Venda venda){
+        return Venda.builder()
+                .vendaDate(OffsetDateTime.now())
+                .vendedor(vendedor)
+                .statusVenda(ABERTA)
+                .valor(venda.getValor())
+                .build();
     }
 
-//    PROBLEMA AQUI
+    @Transactional
+    public Venda gerarVenda(Venda venda){
+        var vendedor = vendedorRepository.findById(venda.getVendedor().getId())
+                .orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
+        venda = definirVendaAberta(vendedor, venda);
 
-//    @Transactional
-//    private Venda definirVendaAberta(Vendedor vendedor, Venda venda){
-//        return Venda.builder()
-//                .vendaDate(OffsetDateTime.now())
-//                .vendedor(vendedor)
-//                .statusVenda(ABERTA)
-//                .valor(venda.getValor())
-//                .build();
-//    }
-//
-//    @Transactional
-//    public Venda gerarVenda(Venda venda){
-//        var vendedor = vendedorRepository.findById(venda.getVendedor().getId()).orElseThrow(() -> new NegocioException("Vendedor nao encontrado"));
-//
-//        venda = definirVendaAberta(vendedor, venda);
-//
-//        return vendaRepository.save(venda);
-//    }
+        return vendaRepository.save(venda);
+    }
 
 
 
