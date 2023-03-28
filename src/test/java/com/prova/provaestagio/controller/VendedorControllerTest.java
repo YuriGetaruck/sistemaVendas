@@ -13,8 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.concurrent.ExecutionException;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -53,10 +51,17 @@ public class VendedorControllerTest {
     }
 
     @Test
-    public void deveListarResumoVendedoreNoPeriodo() throws Exception{
+    public void deveListarResumoVendedoreNoPeriodo() throws Exception {
 
         mvc.perform(get(ENDPOINT + "/2023-03-22/2023-03-26"))
                 .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+    }
+
+    @Test
+    public void deveLancarExcecaoAoCadastrarVendedorInvalido() throws Exception {
+        mvc.perform(post(ENDPOINT))
+                .andExpect(status().is4xxClientError())
                 .andDo(print());
     }
 

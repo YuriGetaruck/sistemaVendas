@@ -1,7 +1,6 @@
 package com.prova.provaestagio.repository;
 
 
-import com.prova.provaestagio.comum.DataService;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +16,7 @@ import java.time.OffsetDateTime;
 @ActiveProfiles("test")
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Sql({"classpath:populaBancoDeDadosParaTestes.sql"})
+@Sql({"classpath:/scripts/populaBancoDeDadosParaTestes.sql"})
 @Transactional
 public class VendasRepositoryTest {
 

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 @ActiveProfiles("test")
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Sql({"classpath:populaBancoDeDadosParaTestes.sql"})
+@Sql({"classpath:/scripts/populaBancoDeDadosParaTestes.sql"})
 @Transactional
 public class VendaServiceTest {
 

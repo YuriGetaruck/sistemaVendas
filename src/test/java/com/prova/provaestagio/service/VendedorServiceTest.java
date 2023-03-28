@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ActiveProfiles("test")
 @SpringBootTest
 @RunWith(SpringRunner.class)
-@Sql({"classpath:populaBancoDeDadosParaTestes.sql"})
+@Sql({"classpath:/scripts/populaBancoDeDadosParaTestes.sql"})
 @Transactional
 public class VendedorServiceTest {
 

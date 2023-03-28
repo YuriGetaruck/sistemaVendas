@@ -3,7 +3,6 @@ package com.prova.provaestagio.dtos;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
@@ -15,7 +14,7 @@ import static com.prova.provaestagio.helper.Helper.umVendedorParaVendedorRespons
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
-@Sql({"classpath:populaBancoDeDadosParaTestes.sql"})
+@Sql({"classpath:/scripts/populaBancoDeDadosParaTestes.sql"})
 @Transactional
 public class VendedorResponseTest {
 

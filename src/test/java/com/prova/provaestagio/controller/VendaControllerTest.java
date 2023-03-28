@@ -1,26 +1,18 @@
 package com.prova.provaestagio.controller;
 
-import com.prova.provaestagio.exception.NegocioException;
 import com.prova.provaestagio.helper.Helper;
-import com.prova.provaestagio.model.Venda;
 import com.prova.provaestagio.model.Vendedor;
 import com.prova.provaestagio.service.VendaService;
 import com.prova.provaestagio.service.VendedorService;
-import com.prova.provaestagio.service.VendedorServiceTest;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -69,10 +61,17 @@ public class VendaControllerTest {
     }
 
     @Test
-    public void deveListarVendasPorPeriodo() throws Exception{
+    public void deveListarVendasPorPeriodo() throws Exception {
 
         mvc.perform(get(ENDPOINT + "/2023-03-22/2023-03-26"))
                 .andExpect(status().is2xxSuccessful())
+                .andDo(print());
+    }
+
+    @Test
+    public void deveLancarExcecaoAoRegistrarVendaComVendedorInvalido() throws Exception {
+        mvc.perform(post(ENDPOINT))
+                .andExpect(status().is4xxClientError())
                 .andDo(print());
     }
 

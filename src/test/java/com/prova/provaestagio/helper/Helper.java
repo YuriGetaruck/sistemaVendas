@@ -5,8 +5,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.prova.provaestagio.enums.EStatusVenda;
 import com.prova.provaestagio.model.Venda;
 import com.prova.provaestagio.model.Vendedor;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -81,18 +79,6 @@ public class Helper {
                 .vendedor(Vendedor.builder().id(vendedor.getId()).build())
                 .build();
     }
-
-    public static JSONObject umaVendaJson() throws JSONException {
-        JSONObject objVendedor = new JSONObject();
-        objVendedor.put("id", "9999");
-
-        JSONObject objVenda = new JSONObject();
-        objVenda.put("valor", 100);
-        objVenda.put( "vendedor",objVendedor);
-
-        return objVenda;
-    }
-
 
     public static byte[] converteParaJsonBytes(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();

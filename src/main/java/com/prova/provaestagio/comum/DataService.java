@@ -32,7 +32,8 @@ public class DataService {
         }
     }
 
-    public void validaDataValida(String dataInicial, String dataFinal) {
+    public static void validaDataValida(String dataInicial, String dataFinal) {
+
 
         var dateTimeFormatter = DateTimeFormatter
                 .ofPattern("uuuu-MM-dd")
